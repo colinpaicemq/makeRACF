@@ -1,3 +1,7 @@
 *.lst
-aa
-bb
+source/*.lst
+source/aa
+source/bb
+extract
+extract.o
+source/*.list
