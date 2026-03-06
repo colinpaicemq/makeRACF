@@ -1,5 +1,6 @@
 *.lst
 source/*.lst
+source/a
 source/aa
 source/bb
 extract
