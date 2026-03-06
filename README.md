@@ -55,4 +55,72 @@ ALTUSER -
     MMAPAREAMAX (16777216) -
     SHMEMMAX (300M))
 ```
+# To install it
 
+Either 
+
+## use github
+
+- clone the repository 
+- use the Unix command cp extract  "//'COLIN.LOAD(EXTRACT)'"  to 
+create the loadmole from the file.
+- apf authorise the PDS.
+
+## Use XMIT
+
+- Download the extract.xmit.bin to your workstation
+- Upload it to z/OS using RECFM FB lRECL 80 BLKSIZE 3200, bin
+- Use tso receive indsn(...)
+
+## execute it
+
+The PDS needs to be APF authorised.
+
+Ive used the operator command
+
+```
+setprog apf,add,dsn=COLIN.LOAD,SMS
+```
+
+Use JCL
+
+```
+//IBMSTA   JOB 1,MSGCLASS=H 
+//S1 EXEC PGM=E2,PARM='U START1 0' 
+//STEPLIB DD DISP=SHR,DSN=COLIN.LOAD 
+//SYSPRINT DD DISP=SHR,DSN=COLIN.MIG.JCL(USTART1) 
+//SYSOUT   DD SYSOUT=* 
+//SYSERR   DD SYSOUT=* 
+```
+
+Where the parameters are
+
+### for a userid
+
+- U userid  <n>
+- u userid* <n>
+
+### for a dataset 
+
+-D COLIN.ABCD    <n>
+-d COLIN.* <n>
+
+### for a general resource group
+
+- class CSQ <n>
+- class CSQ* <n>
+
+Where class is STARTED to similar class name
+
+n is an optional debug level defaults to 0.  Other values are 1 and 2
+
+### Output 
+The output is stored in //SYSPRINT DD DISP=SHR,DSN=... and can be used 
+
+```
+//IBMUSERT JOB 1,MSGCLASS=H 
+//S1  EXEC PGM=IKJEFT01,REGION=0M 
+//SYSPRINT DD SYSOUT=* 
+//SYSTSIN  DD DISP=SHR,DSN=COLIN.MIG.JCL(USTART1) 
+//SYSTSPRT DD SYSOUT=* 
+```
