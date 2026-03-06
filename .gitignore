@@ -3,6 +3,5 @@ source/*.lst
 source/a
 source/aa
 source/bb
-extract
 extract.o
 source/*.list
