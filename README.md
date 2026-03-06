@@ -63,7 +63,7 @@ Either
 
 - clone the repository 
 - use the Unix command cp extract  "//'COLIN.LOAD(EXTRACT)'"  to 
-create the loadmole from the file.
+create the loadmodule from the file.
 - apf authorise the PDS.
 
 ## Use XMIT
@@ -72,11 +72,11 @@ create the loadmole from the file.
 - Upload it to z/OS using RECFM FB lRECL 80 BLKSIZE 3200, bin
 - Use tso receive indsn(...)
 
-## execute it
+## Execute it
 
 The PDS needs to be APF authorised.
 
-Ive used the operator command
+I've used the operator command
 
 ```
 setprog apf,add,dsn=COLIN.LOAD,SMS
@@ -95,22 +95,22 @@ Use JCL
 
 Where the parameters are
 
-### for a userid
+### For a userid
 
 - U userid  <n>
-- u userid* <n>
+- U userid* <n>
 
-### for a dataset 
+### For a dataset 
 
--D COLIN.ABCD    <n>
--d COLIN.* <n>
+- D COLIN.ABCD    <n>
+- D COLIN.* <n>
 
-### for a general resource group
+### For a general resource group
 
 - class CSQ <n>
 - class CSQ* <n>
 
-Where class is STARTED to similar class name
+Where class is STARTED or similar class name.
 
 n is an optional debug level defaults to 0.  Other values are 1 and 2
 
